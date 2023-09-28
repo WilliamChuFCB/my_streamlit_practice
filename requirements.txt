@@ -1,0 +1,2 @@
+streamlit==0.91.0  
+torch==1.10.0  
