@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import torch
 from PIL import Image
+import io
+import numpy as np
 
 # set the title and text
 st.title("Object Detection Using YOLO") 
@@ -35,8 +37,13 @@ if image_upload is not None:
     st.subheader("Results")
     model = torch.hub.load("ultralytics/yolov5", "yolov5s", pretrained=True) 
     results = model(image_open) 
-    results.save() 
-    st.image("./runs/detect/exp/image0.jpg")
+
+    img_byte_arr = io.BytesIO()
+    rendered_img = results.render()
+    img_array = np.array(rendered_img)
+    img_pil = Image.fromarray(img_array[0])
+    img_pil.save(img_byte_arr, format = 'JPEG')
+    st.image(img_byte_arr.getvalue(), caption = 'Processed Image', use_column_width=True)
 
     # print results details
     results.pandas().xyxy[0]
