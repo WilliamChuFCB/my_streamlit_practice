@@ -8,4 +8,4 @@ You can access the web app here: [visit my streamlit app](https://myapppractice-
 
 Here is a sample output of this YOLO model:
 
-![](./YOLO_sample.jpeg)
+![](./YOLO_example.jpeg)
